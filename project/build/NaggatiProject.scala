@@ -3,16 +3,25 @@ import com.twitter.sbt.StandardProject
 
 
 class NaggatiProject(info: ProjectInfo) extends StandardProject(info) {
-  val specs = "org.scala-tools.testing" % "specs" % "1.6.2.1"
-  val xrayspecs = "com.twitter" % "xrayspecs" % "1.0.7"
+  val specs     = buildScalaVersion match {
+    case "2.7.7" => "org.scala-tools.testing" % "specs" % "1.6.2.1"
+    case _ => "org.scala-tools.testing" %% "specs" % "1.6.5"
+  }
+  val xrayspecs = buildScalaVersion match {
+    case "2.7.7" => "com.twitter" % "xrayspecs" % "1.0.7"
+    case _ => "com.twitter" %% "xrayspecs" % "2.0"
+  }
   val vscaladoc = "org.scala-tools" % "vscaladoc" % "1.1-md-3"
 
-  val configgy = "net.lag" % "configgy" % "1.5.3"
+  val configgy  = buildScalaVersion match {
+    case "2.7.7" => "net.lag" % "configgy" % "1.5.3"
+    case _ => "net.lag" % "configgy" % "2.0.0"
+  }
   val mina = "org.apache.mina" % "mina-core" % "2.0.0-M6"
   val slf4j_api = "org.slf4j" % "slf4j-api" % "1.5.2"
   val slf4j_jdk14 = "org.slf4j" % "slf4j-jdk14" % "1.5.2"
 
-  val twitter_actors = "com.twitter" % "twitteractors" % "1.0.0"
+  val twitter_actors = "com.twitter" %% "twitteractors" % "2.0.0-SNAPSHOT"
 
   override def pomExtra =
     <licenses>
@@ -24,6 +33,7 @@ class NaggatiProject(info: ProjectInfo) extends StandardProject(info) {
     </licenses>
 
   override def releaseBuild = true
+  override def disableCrossPaths = false
 
   Credentials(Path.userHome / ".ivy2" / "credentials", log)
   val publishTo = "nexus" at "http://nexus.scala-tools.org/content/repositories/releases/"
