@@ -19,6 +19,7 @@ package net.lag.naggati.asn1
 import net.lag.extensions._
 import net.lag.naggati.ProtocolError
 import net.lag.naggati.Steps._
+import net.lag.naggati.End
 
 
 object Tag {

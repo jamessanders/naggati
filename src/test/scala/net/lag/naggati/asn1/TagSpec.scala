@@ -16,6 +16,7 @@
 
 package net.lag.naggati.asn1
 
+import net.lag.naggati.{Decoder, ProtocolError}
 import net.lag.naggati.Steps._
 import org.apache.mina.core.buffer.IoBuffer
 import org.apache.mina.core.filterchain.IoFilter
