@@ -20,7 +20,7 @@ class NaggatiProject(info: ProjectInfo) extends StandardProject(info) with Subve
   val slf4j_api = "org.slf4j" % "slf4j-api" % "1.5.2"
   val slf4j_jdk14 = "org.slf4j" % "slf4j-jdk14" % "1.5.2"
 
-  val twitter_actors = "com.twitter" %% "twitteractors" % "2.0.0-SNAPSHOT"
+  val twitter_actors = "com.twitter" %% "twitteractors" % "2.0.0"
 
   override def pomExtra =
     <licenses>
