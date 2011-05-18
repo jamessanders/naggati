@@ -16,11 +16,11 @@
 
 package net.lag.naggati
 
-import com.twitter.actors.Actor
+import actors.Actor
 import scala.collection.immutable
 import org.apache.mina.core.service.IoHandler
 import org.apache.mina.core.session.{IdleStatus, IoSession}
-import net.lag.logging.Logger
+
 
 
 /**
@@ -59,7 +59,6 @@ case class SessionInfo(actor: Option[Actor], filter: MinaMessage.Filter)
  */
 class IoHandlerActorAdapter(val actorFactory: (IoSession) => Actor) extends IoHandler {
 
-  private val log = Logger.get
 
   // initialize the session and attach some state to it.
   def sessionCreated(session: IoSession) = {
@@ -108,7 +107,6 @@ class IoHandlerActorAdapter(val actorFactory: (IoSession) => Actor) extends IoHa
   def exceptionCaught(session: IoSession, cause: Throwable) = {
     sendOr(session, MinaMessage.ExceptionCaught(cause)) {
       // weird bad: an exception happened but i guess it wasn't associated with any existing session.
-      log.error(cause, "Exception inside mina!")
     }
   }
 
